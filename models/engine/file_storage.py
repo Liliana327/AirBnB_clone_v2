@@ -25,11 +25,14 @@ class FileStorage:
         Return:
             returns a dictionary of __object
         """
-        r_f = {}
-        for key, value in self.__objects.items():
-            if type(value) is cls:
-                r_f[key] = value
-        return r_f
+        if cls is None:
+            return self.__objects
+        else:
+            r_f = {}
+            for key, value in self.__objects.items():
+                if type(value) is cls:
+                    r_f[key] = value
+            return r_f
 
     def new(self, obj):
         """sets __object to given obj
