@@ -62,8 +62,6 @@ class FileStorage:
 
     def delete(self, obj=None):
         """ delete the file path
-	"""
+        """
         if obj in self.__objects.values():
             del self.__objects["{}.{}".format(type(obj).__name__, obj.id)]
-
-
