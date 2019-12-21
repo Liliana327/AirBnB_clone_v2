@@ -1,9 +1,11 @@
 #!/usr/bin/python3
 """This is the user class"""
+
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
-from models.place import Place
+import os
 from sqlalchemy.orm import relationship
+
 
 class User(BaseModel, Base):
     """This is the class for user
@@ -13,6 +15,8 @@ class User(BaseModel, Base):
         first_name: first name
         last_name: last name
     """
+    __tablename__ = 'users'
+
     if os.getenv('HBNB_TYPE_STORAGE') == 'db':
         email = Column(String(128), nullable=False)
         password = Column(String(128), nullable=False)
