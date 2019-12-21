@@ -34,9 +34,9 @@ class BaseModel:
                     value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                 if key != "__class__":
                     setattr(self, key, value)
-        else:
-            self.id = str(uuid.uuid4())
-            self.created_at = self.updated_at = datetime.now()
+        
+        self.id = str(uuid.uuid4())
+        self.created_at = self.updated_at = datetime.now()
 
     def __str__(self):
         """returns a string
@@ -68,6 +68,7 @@ class BaseModel:
         my_dict = dict(self.__dict__)
         if '_sa_instance_state' in my_dict.keys():
             del my_dict['_sa_instance_state']
+        print(my_dict)
         my_dict["__class__"] = str(type(self).__name__)
         my_dict["created_at"] = self.created_at.isoformat()
         my_dict["updated_at"] = self.updated_at.isoformat()
