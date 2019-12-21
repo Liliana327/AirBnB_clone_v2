@@ -7,8 +7,9 @@ import os
 import models
 from models.city import City
 
+
 class State(BaseModel, Base):
-    """This is the class for State    
+    """This is the class for State
     """
     __tablename__ = "states"
     if os.getenv('HBNB_TYPE_STORAGE') != 'db':
