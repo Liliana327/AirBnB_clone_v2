@@ -48,6 +48,7 @@ class FileStorage:
         """
         my_dict = {}
         for key, value in self.__objects.items():
+            print(value.to_dict())
             my_dict[key] = value.to_dict()
         with open(self.__file_path, 'w', encoding="UTF-8") as f:
             json.dump(my_dict, f)
@@ -58,6 +59,7 @@ class FileStorage:
         try:
             with open(self.__file_path, 'r', encoding="UTF-8") as f:
                 for key, value in (json.load(f)).items():
+                    print(value)
                     value = eval(value["__class__"])(**value)
                     self.__objects[key] = value
         except FileNotFoundError:
