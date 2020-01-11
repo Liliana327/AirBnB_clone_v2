@@ -25,6 +25,8 @@ def do_deploy(archive_path):
         run("rm -rf {}web_static".format(not_path))
         run("rm -rf {}".format(symlink))
         run("ln -s {} {}".format(not_path, symlink))
+        if result.failed:
+            return False
         return True
     except:
         return False
