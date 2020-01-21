@@ -80,8 +80,7 @@ class DBStorage:
         """
         Base.metadata.create_all(self.__engine)
         maker = sessionmaker(bind=self.__engine, expire_on_commit=False)
-        s_factr = scoped_session(maker)
-        self.__session = s_factr()
+        self.__session = scoped_session(maker)
 
     def close(self):
         """call remove() method on the private session attribute
