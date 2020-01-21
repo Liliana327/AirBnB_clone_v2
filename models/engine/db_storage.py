@@ -37,19 +37,21 @@ class DBStorage:
         """
         all dicts
         """
-        dicts = {}
-        if cls:
-            cname = cls.__name__
-            query = self.__session.query(cls)
-            for instance in query:
-                dicts[cname + '.' + instance.id] = instance
+        classes = ['State', 'City', 'User', 'Place', 'Review', 'Amenity']
+        objs = {}
+
+        if cls is None:
+            for class_nm in classes:
+                query = self.__session.query(eval(class_nm)).all()
+                for obj in query:
+                    key = obj.__class__.__name__ + '.' + obj.id
+                    objs[key] = obj
         else:
-            for subclass in Base.__subclasses__():
-                query = self.__session.query(subclass)
-                cname = subclass.__name__
-                for instance in query:
-                    dicts[cname + '.' + instance.id] = instance
-        return dicts
+            query = self.__session.query(eval(cls)).all()
+            for obj in query:
+                key = obj.__class__.__name__ + '.' + obj.id
+                objs[key] = obj
+        return objs
 
     def new(self, obj):
         """
@@ -81,11 +83,6 @@ class DBStorage:
         s_factr = scoped_session(maker)
         self.__session = s_factr()
 
-    def close(self):
-        """
-        reload
-        """
-        self.__session.remove()
     def close(self):
         """call remove() method on the private session attribute
         """
