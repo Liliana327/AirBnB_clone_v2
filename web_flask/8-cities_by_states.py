@@ -18,15 +18,6 @@ def current_remove(self):
     storage.close()
 
 
-@app.route('/states_list')
-def display_html():
-    """
-    display a HTML page
-    """
-    data = storage.all("State")
-    return render_template('7-states_list.html', states=data)
-
-
 @app.route('/cities_by_states')
 def displays_html():
     """
